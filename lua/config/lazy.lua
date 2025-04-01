@@ -32,6 +32,15 @@ require("lazy").setup({
         })
       end,
     },
+    -- add lazygit
+    {
+      "kdheepak/lazygit.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" }, -- Ensure plenary is installed as a dependency
+      config = function()
+        -- LazyGit key mapping here, e.g., leader g g
+        vim.api.nvim_set_keymap("n", "<Leader>gg", "<cmd>LazyGit<CR>", { noremap = true, silent = true })
+      end,
+    },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
