@@ -9,4 +9,11 @@ return {
       vim.cmd([[colorscheme aura-dark]])
     end,
   },
+  -- add solarized-osaka
+  {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
 }
