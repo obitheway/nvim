@@ -8,10 +8,16 @@ return {
 
       rt.setup({
         dap = {
-          adapter = rt.dap.get_codelldb_adapter(),
+          adapter = require("rust-tools.dap").get_codelldb_adapter(
+            -- Provide the paths to `codelldb` and `liblldb` here:
+            -- Example paths; adjust as needed for your system
+            vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb",
+            vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so" -- .dylib for macOS, .dll for Windows
+          ),
         },
       })
 
+      -- Optional: Only set this if you need a custom configuration beyond rust-tools
       local dap = require("dap")
       dap.configurations.rust = {
         {
@@ -19,7 +25,6 @@ return {
           type = "codelldb",
           request = "launch",
           program = function()
-            -- Prompt for executable or build target (adjust as needed)
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
           end,
           cwd = "${workspaceFolder}",
